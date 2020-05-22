@@ -1,4 +1,4 @@
-class Api::V1::TripsController < ActionController::API
+class Api::V1::TripsController < ApplicationController
   def index
     trips = [
       {trip_name: "whistler", id: 1},

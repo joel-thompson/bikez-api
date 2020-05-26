@@ -5,14 +5,13 @@ orbs:
 jobs:
   build:
     docker:
-      - image: cimg/ruby:2.6.5
+      - image: circleci/ruby:2.6.5
     steps:
       - checkout
       - run:
           name: Install bundler
           command: gem install bundler -v 1.17.3
       - ruby/install-deps
-      - ruby/bundle-install
   test:
     parallelism: 3
     docker:

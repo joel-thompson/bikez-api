@@ -50,7 +50,7 @@ jobs:
 
       - name: Run tests
         run: bundle exec rspec
-        env:
+        # env:/
           # POSTGRES_USER: bikez_api
           # POSTGRES_DB: bikez_api_test
           # POSTGRES_PASSWORD: postgres

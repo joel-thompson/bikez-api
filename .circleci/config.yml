@@ -6,14 +6,13 @@ jobs:
   build:
     docker:
       - image: cimg/ruby:2.6.5
-    executor: ruby/default
     steps:
       - checkout
       - run:
-          name: Which bundler?
-          command: gem install bundler
+          name: Install bundler
+          command: gem install bundler -v 1.17.3
       - ruby/install-deps
-      # - ruby/bundle-install
+      - ruby/bundle-install
   test:
     parallelism: 3
     docker:

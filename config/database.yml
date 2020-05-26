@@ -86,7 +86,7 @@ production:
 
 test:
   <<: *default
-  database: test_app_6_test
+  database: bikez_api_test
   adapter: postgresql
   host: localhost
   encoding: unicode

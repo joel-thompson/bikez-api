@@ -1,24 +1,14 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ruby on Rails API for the frontend react app: https://github.com/joel-thompson/bikez
 
-Things you may want to cover:
+Runs on Heroku. When pushing to master make sure to run migrations manually (below).
 
-* Ruby version
+## Start the server:
+`rails s`
 
-* System dependencies
+## Run specs
+`bundle exec rspec`
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Run migrations on production
+`heroku run rails db:migrate`

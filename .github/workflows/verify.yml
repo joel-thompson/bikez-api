@@ -9,10 +9,11 @@ jobs:
       postgres:
         image: postgres:11
         env:
-          POSTGRES_USER: myapp
-          POSTGRES_DB: myapp_test
+          POSTGRES_USER: bikez_api
+          POSTGRES_DB: bikez_api_test
           POSTGRES_PASSWORD: ""
         ports: ["5432:5432"]
+        options: --health-interval 10ms --health-timeout 500ms --health-retries 15
 
     steps:
       - name: Checkout code

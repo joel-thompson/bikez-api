@@ -37,7 +37,10 @@ jobs:
         env:
           RAILS_ENV: test
           PGHOST: localhost
-          PGUSER: myapp
+          PGUSER: bikez_api
+          POSTGRES_USER: bikez_api
+          POSTGRES_DB: bikez_api_test
+          POSTGRES_PASSWORD: postgres
         run: |
           bin/rails db:setup
 

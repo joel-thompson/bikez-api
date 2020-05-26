@@ -3,4 +3,8 @@ class User < ApplicationRecord
 
   validates_presence_of :email
   validates_uniqueness_of :email
+
+  def returns_fred
+    "fred"
+  end
 end

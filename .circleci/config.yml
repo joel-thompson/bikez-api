@@ -9,10 +9,10 @@ jobs:
     executor: ruby/default
     steps:
       - checkout
+      - run:
+          name: Which bundler?
+          command: gem install bundler -v 1.17.3
       - ruby/install-deps
-      # - run:
-      #     name: Which bundler?
-      #     command: bundle -v
       # - ruby/bundle-install
   test:
     parallelism: 3

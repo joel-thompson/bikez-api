@@ -83,3 +83,12 @@ production:
   database: bikez_api_production
   username: bikez_api
   password: <%= ENV['BIKEZ_API_DATABASE_PASSWORD'] %>
+
+test:
+  <<: *default
+  database: bikez_api_test
+  adapter: postgresql
+  host: localhost
+  encoding: unicode
+  username: <%= ENV["POSTGRES_USER"] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] %>

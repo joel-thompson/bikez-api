@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Api::V1::PostsController, type: :controller do
   let(:invalid_session) { {} }
-  let(:user) { FactoryBot.create(:user, email: "foo@foo.foo") }
+  let(:user) { create(:user, email: "foo@foo.foo") }
   let(:valid_session) { { user_id: user.id } }
 
   describe "GET #index" do
@@ -12,7 +12,7 @@ RSpec.describe Api::V1::PostsController, type: :controller do
     end
 
     it "returns a successful response when logged in" do
-      FactoryBot.create(:user)
+      create(:user)
       get :index, params: {}, session: valid_session
       expect(response).to be_successful
     end

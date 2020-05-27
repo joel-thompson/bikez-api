@@ -40,6 +40,7 @@ end
 group :test do
   # Might be other lines here, so simply add after them
   gem 'factory_bot_rails'
+  gem 'database_cleaner-active_record'
 end
 
 group :development do

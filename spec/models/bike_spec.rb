@@ -41,4 +41,29 @@ RSpec.describe Bike, type: :model do
       end
     end
   end
+
+  context ".active_suspension_parts" do
+    let(:user) { create(:user) }
+    let(:bike) { create(:bike, user: user) }
+    let(:fork) { create(:suspension_part, user: user, name: "fox 36", component_type: "fork") }
+    let(:shock) { create(:suspension_part, user: user, name: "rockshox coil", component_type: "shock") }
+    let(:shock2) { create(:suspension_part, user: user, name: "fox dpx2", component_type: "shock") }
+
+    it "finds the active parts when used without a specific time" do
+      create(:suspension_part_assignment, bike: bike, suspension_part: fork, assigned_at: Time.now - 1.minute)
+      create(:suspension_part_assignment, bike: bike, suspension_part: shock, assigned_at: Time.now - 1.minute)
+      create(:suspension_part_assignment, bike: bike, suspension_part: shock2, assigned_at: Time.now - 2.days, removed_at: Time.now - 1.minute)
+
+      expect(bike.active_suspension_parts).to match_array([fork, shock])
+    end
+
+    it "finds the active parts when used with a specific time" do
+      create(:suspension_part_assignment, bike: bike, suspension_part: fork, assigned_at: Time.now - 10.days, removed_at: Time.now - 5.days)
+      create(:suspension_part_assignment, bike: bike, suspension_part: shock, assigned_at: Time.now - 10.days, removed_at: Time.now - 5.days)
+      create(:suspension_part_assignment, bike: bike, suspension_part: shock2, assigned_at: Time.now - 5.days)
+
+      expect(bike.active_suspension_parts(Time.now - 9.days)).to match_array([fork, shock])
+    end
+
+  end
 end

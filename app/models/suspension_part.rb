@@ -1,8 +1,11 @@
 class SuspensionPart < ApplicationRecord
+  include StateOfTheNation
   belongs_to :user
 
   has_many :suspension_part_assignments
   has_many :bikes, through: :suspension_part_assignments
+
+  has_active :suspension_part_assignments
 
   VALID_TYPES = ["fork", "shock"].freeze
 

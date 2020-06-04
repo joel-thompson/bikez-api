@@ -28,6 +28,8 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'bcrypt', '~> 3.1', '>= 3.1.13'
 gem 'pry'
 
+gem 'state_of_the_nation'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

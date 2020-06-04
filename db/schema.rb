@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_04_171243) do
+ActiveRecord::Schema.define(version: 2020_06_04_183955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2020_06_04_171243) do
   create_table "suspension_parts", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name", null: false
-    t.string "type", null: false
+    t.string "component_type", null: false
     t.boolean "high_speed_compression", default: false, null: false
     t.boolean "low_speed_compression", default: true, null: false
     t.boolean "high_speed_rebound", default: false, null: false

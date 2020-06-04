@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :suspension_part do
     association :user
     name { "fox 36" }
-    type { "fork" }
+    component_type { "fork" }
     high_speed_compression { true }
     low_speed_compression { true }
     high_speed_rebound { true }

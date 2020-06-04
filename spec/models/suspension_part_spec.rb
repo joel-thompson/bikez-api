@@ -17,18 +17,18 @@ RSpec.describe SuspensionPart, type: :model do
     end
 
     context "only allows types defined in VALID_TYPES" do
-      it "fails for type = wheel" do
-        part = build(:suspension_part, type: "wheel")
+      it "fails for component_type = wheel" do
+        part = build(:suspension_part, component_type: "wheel")
         expect(part.valid?).to eq false
       end
 
-      it "passes for type = fork" do
-        part = build(:suspension_part, type: "fork")
+      it "passes for component_type = fork" do
+        part = build(:suspension_part, component_type: "fork")
         expect(part.valid?).to eq true
       end
 
-      it "passes for type = shock" do
-        part = build(:suspension_part, type: "shock")
+      it "passes for component_type = shock" do
+        part = build(:suspension_part, component_type: "shock")
         expect(part.valid?).to eq true
       end
     end
@@ -38,7 +38,7 @@ RSpec.describe SuspensionPart, type: :model do
         part = build(:suspension_part, name: nil)
         expect(part.valid?).to eq false
 
-        part = build(:suspension_part, type: nil)
+        part = build(:suspension_part, component_type: nil)
         expect(part.valid?).to eq false
 
         part = build(:suspension_part, high_speed_compression: nil)

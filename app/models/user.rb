@@ -5,4 +5,6 @@ class User < ApplicationRecord
   validates_uniqueness_of :email
 
   has_many :posts
+  has_many :bikes
+  has_many :suspension_parts
 end

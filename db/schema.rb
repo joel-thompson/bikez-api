@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_26_221002) do
+ActiveRecord::Schema.define(version: 2020_06_04_004459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,22 @@ ActiveRecord::Schema.define(version: 2020_05_26_221002) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "suspension_parts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name", null: false
+    t.string "type", null: false
+    t.boolean "high_speed_compression", default: false, null: false
+    t.boolean "low_speed_compression", default: true, null: false
+    t.boolean "high_speed_rebound", default: false, null: false
+    t.boolean "low_speed_rebound", default: true, null: false
+    t.boolean "volume", default: true, null: false
+    t.boolean "pressure", default: true, null: false
+    t.boolean "spring_rate", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_suspension_parts_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
@@ -31,4 +47,5 @@ ActiveRecord::Schema.define(version: 2020_05_26_221002) do
   end
 
   add_foreign_key "posts", "users"
+  add_foreign_key "suspension_parts", "users"
 end

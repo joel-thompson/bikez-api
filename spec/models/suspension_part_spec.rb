@@ -2,6 +2,12 @@ require 'rails_helper'
 
 RSpec.describe SuspensionPart, type: :model do
   context "validations" do
+    context "valid part" do
+      it "is valid" do
+        part = create(:suspension_part)
+        expect(part.valid?).to eq true
+      end
+    end
 
     context "requires a user" do
       it "fails without a user" do

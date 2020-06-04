@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_04_164654) do
+ActiveRecord::Schema.define(version: 2020_06_04_171243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,17 @@ ActiveRecord::Schema.define(version: 2020_06_04_164654) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "suspension_part_assignments", force: :cascade do |t|
+    t.bigint "bike_id", null: false
+    t.bigint "suspension_part_id", null: false
+    t.datetime "assigned_at", null: false
+    t.datetime "removed_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["bike_id"], name: "index_suspension_part_assignments_on_bike_id"
+    t.index ["suspension_part_id"], name: "index_suspension_part_assignments_on_suspension_part_id"
   end
 
   create_table "suspension_parts", force: :cascade do |t|
@@ -56,5 +67,7 @@ ActiveRecord::Schema.define(version: 2020_06_04_164654) do
 
   add_foreign_key "bikes", "users"
   add_foreign_key "posts", "users"
+  add_foreign_key "suspension_part_assignments", "bikes"
+  add_foreign_key "suspension_part_assignments", "suspension_parts"
   add_foreign_key "suspension_parts", "users"
 end

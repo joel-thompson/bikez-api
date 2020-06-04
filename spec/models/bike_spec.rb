@@ -2,6 +2,13 @@ require "rails_helper"
 
 RSpec.describe Bike, type: :model do
   context "validations" do
+    context "valid bike" do
+      it "is valid" do
+        bike = create(:bike)
+        expect(bike.valid?).to eq true
+      end
+    end
+
     context "requires a user" do
       it "fails without a user" do
         bike = build(:bike, user: nil)

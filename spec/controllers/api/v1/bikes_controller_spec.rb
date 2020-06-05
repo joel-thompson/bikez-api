@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Api::V1::PostsController, type: :controller do
+RSpec.describe Api::V1::BikesController, type: :controller do
   let(:invalid_session) { {} }
   let(:user) { create(:user, email: "foo@foo.foo") }
   let(:valid_session) { { user_id: user.id } }

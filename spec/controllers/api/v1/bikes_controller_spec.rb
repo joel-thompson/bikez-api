@@ -20,17 +20,24 @@ RSpec.describe Api::V1::BikesController, type: :controller do
 
   context "#index" do
 
-    let(:bikes) { 
+    let!(:bikes) { 
       [
         create(:bike, user: user, name: "patrol"),
         create(:bike, user: user, name: "nomad"),
       ]
      }
 
+    let(:expected_json) { 
+      [
+        { id: bikes.first.id, name: "patrol" }, 
+        { id: bikes.second.id, name: "nomad" }, 
+      ].to_json 
+    }
+
     it "returns the users bikes" do
       get :index, params: {}, session: valid_session
       expect(response).to be_successful
-      # expect(response.body).to eq bikes.to_json need to fix
+      expect(response.body).to eq expected_json
     end
   end
 end

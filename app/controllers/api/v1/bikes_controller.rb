@@ -1,7 +1,7 @@
 class Api::V1::BikesController < AuthenticatedApplicationController
 
   def index
-    render json: { bikes: @current_user.bikes }, status: 200
+    render json: @current_user.bikes, status: 200
   end
 
   def create

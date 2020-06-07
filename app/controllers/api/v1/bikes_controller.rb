@@ -9,7 +9,7 @@ class Api::V1::BikesController < AuthenticatedApplicationController
   end
 
   def show
-    render json: @current_user.bikes.find_by(id: params[:id])
+    render json: @current_user.bikes.find_by(id: params[:id]), status: 200
   end
 
   def destroy
@@ -17,6 +17,5 @@ class Api::V1::BikesController < AuthenticatedApplicationController
   end
 
   def update
-    
   end
 end

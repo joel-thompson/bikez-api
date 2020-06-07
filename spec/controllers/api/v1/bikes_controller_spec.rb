@@ -135,4 +135,28 @@ RSpec.describe Api::V1::BikesController, type: :controller do
       expect(JSON.parse(response.body)["errors"]).to include "bike not found"
     end
   end
+
+  context "#destroy" do
+    it "deletes the bike" do
+      bike = create(:bike, user: user, name: "delete me")
+      expect {
+        delete :destroy, params: { id: bike.id }, session: valid_session
+      }.to change{ Bike.count }.by(-1)
+    end
+
+    it "returns 404 if the bike cant be found" do
+      delete :destroy, params: { id: 500 }, session: valid_session
+      expect(response).to_not be_successful
+      expect(response.status).to eq 404
+      expect(JSON.parse(response.body)["errors"]).to include "bike not found"
+    end
+
+    it "returns 404 if the bike belongs to another user" do
+      bike = create(:bike)
+      delete :destroy, params: { id: bike.id }, session: valid_session
+      expect(response).to_not be_successful
+      expect(response.status).to eq 404
+      expect(JSON.parse(response.body)["errors"]).to include "bike not found"
+    end
+  end
 end

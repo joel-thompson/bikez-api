@@ -7,7 +7,12 @@ RSpec.describe BikeSerializer do
 
   context "serializing" do
     it "returns the correct json" do
-      expected_output = { id: bike.id, name: bike.name }.to_json
+      expected_output = { 
+        id: bike.id, 
+        name: bike.name,
+        # active_suspension_parts: [],
+      }.to_json
+
       expect(subject).to eq expected_output
     end
   end

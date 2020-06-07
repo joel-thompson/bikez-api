@@ -19,7 +19,6 @@ RSpec.describe Api::V1::BikesController, type: :controller do
   end
 
   context "#index" do
-
     let!(:bikes) { 
       [
         create(:bike, user: user, name: "patrol"),
@@ -28,12 +27,30 @@ RSpec.describe Api::V1::BikesController, type: :controller do
      }
 
     it "returns the users bikes" do
-      expected_json = [
-        { id: bikes.first.id, name: "patrol" }, 
-        { id: bikes.second.id, name: "nomad" }, 
-      ].to_json
+      # expected_json = [
+      #   { id: bikes.first.id, name: "patrol" }, 
+      #   { id: bikes.second.id, name: "nomad" }, 
+      # ].to_json
+      expected_json = ActiveModel::SerializableResource.new(
+        bikes, 
+        each_serializer: BikeSerializer
+      ).to_json
 
       get :index, params: {}, session: valid_session
+      expect(response).to be_successful
+      expect(response.body).to eq expected_json
+    end
+  end
+
+  context "#show" do
+     let!(:bike) { create(:bike, user: user, name: "patrol") }
+
+    it "returns the bike json" do
+      # expected_json = { id: bike.id, name: "patrol" }.to_json
+      expected_json = BikeSerializer.new(bike).to_json
+
+
+      get :show, params: {id: bike.id}, session: valid_session
       expect(response).to be_successful
       expect(response.body).to eq expected_json
     end

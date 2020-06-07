@@ -27,14 +27,12 @@ RSpec.describe Api::V1::BikesController, type: :controller do
       ]
      }
 
-    let(:expected_json) { 
-      [
+    it "returns the users bikes" do
+      expected_json = [
         { id: bikes.first.id, name: "patrol" }, 
         { id: bikes.second.id, name: "nomad" }, 
-      ].to_json 
-    }
+      ].to_json
 
-    it "returns the users bikes" do
       get :index, params: {}, session: valid_session
       expect(response).to be_successful
       expect(response.body).to eq expected_json

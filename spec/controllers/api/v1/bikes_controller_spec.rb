@@ -27,10 +27,6 @@ RSpec.describe Api::V1::BikesController, type: :controller do
      }
 
     it "returns the users bikes" do
-      # expected_json = [
-      #   { id: bikes.first.id, name: "patrol" }, 
-      #   { id: bikes.second.id, name: "nomad" }, 
-      # ].to_json
       expected_json = ActiveModel::SerializableResource.new(
         bikes, 
         each_serializer: BikeSerializer
@@ -46,7 +42,6 @@ RSpec.describe Api::V1::BikesController, type: :controller do
     let!(:bike) { create(:bike, user: user, name: "patrol") }
 
     it "returns the bike json" do
-      # expected_json = { id: bike.id, name: "patrol" }.to_json
       expected_json = BikeSerializer.new(bike).to_json
 
       get :show, params: {id: bike.id}, session: valid_session

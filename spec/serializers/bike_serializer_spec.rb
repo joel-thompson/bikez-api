@@ -20,10 +20,7 @@ RSpec.describe BikeSerializer do
       expected_output = { 
         id: bike.id, 
         name: bike.name,
-        active_suspension_parts: ActiveModelSerializers::SerializableResource.new(
-          suspension_parts, 
-          each_serializer: SuspensionPartSerializer
-        ).serializable_hash,
+        active_suspension_part_ids: [part1.id, part2.id]
       }.to_json
 
       expect(subject).to eq expected_output

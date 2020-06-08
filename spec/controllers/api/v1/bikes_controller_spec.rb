@@ -27,7 +27,7 @@ RSpec.describe Api::V1::BikesController, type: :controller do
      }
 
     it "returns the users bikes" do
-      expected_json = ActiveModel::SerializableResource.new(
+      expected_json = ActiveModelSerializers::SerializableResource.new(
         bikes, 
         each_serializer: BikeSerializer
       ).to_json

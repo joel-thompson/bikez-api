@@ -5,12 +5,25 @@ RSpec.describe BikeSerializer do
   let(:bike) { create(:bike, user: user) }
   let(:subject) { BikeSerializer.new(bike).to_json }
 
+  let(:part1) { create(:suspension_part, user: user, name: "part1", component_type: "fork") }
+  let(:part2) { create(:suspension_part, user: user, name: "part2", component_type: "shock") }
+  let!(:suspension_parts) {[ part1,part2 ]}
+  let!(:suspension_part_assignments) { 
+    [
+      create(:suspension_part_assignment, suspension_part: part1, bike: bike),
+      create(:suspension_part_assignment, suspension_part: part2, bike: bike),
+    ] 
+  }
+
   context "serializing" do
     it "returns the correct json" do
       expected_output = { 
         id: bike.id, 
         name: bike.name,
-        # active_suspension_parts: [],
+        active_suspension_parts: ActiveModelSerializers::SerializableResource.new(
+          suspension_parts, 
+          each_serializer: SuspensionPartSerializer
+        ).serializable_hash,
       }.to_json
 
       expect(subject).to eq expected_output

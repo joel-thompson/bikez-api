@@ -11,7 +11,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :trips, only: [:index]
       resources :posts, only: [:index]
-      resources :bikes
+      resources :bikes, only: [:index, :show, :create, :update, :destroy]
+      resources :suspension_parts, only: [:index, :show, :create, :update, :destroy]
     end
   end
 end

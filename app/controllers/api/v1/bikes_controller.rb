@@ -1,6 +1,11 @@
 class Api::V1::BikesController < AuthenticatedApplicationController
   def index
-    render json: @current_user.bikes, status: 200
+    if params[:ids]
+      bikes = @current_user.bikes.find(params[:ids])
+      render json: bikes, status: 200
+    else
+      render json: @current_user.bikes, status: 200
+    end
   end
 
   def show

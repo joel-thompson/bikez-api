@@ -36,6 +36,21 @@ RSpec.describe Api::V1::BikesController, type: :controller do
       expect(response).to be_successful
       expect(response.body).to eq expected_json
     end
+
+    it "returns specified bikes if ids is passed" do
+      bike1 = create(:bike, user: user, name: "patrol")
+      bike2 = create(:bike, user: user, name: "nomad")
+      bike3 = create(:bike, user: user, name: "scout")
+
+      expected_json = ActiveModelSerializers::SerializableResource.new(
+        [bike1, bike2], 
+        each_serializer: BikeSerializer
+      ).to_json
+
+      get :index, params: {ids: [bike1.id, bike2.id]}, session: valid_session
+      expect(response).to be_successful
+      expect(response.body).to eq expected_json
+    end
   end
 
   context "#show" do

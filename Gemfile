@@ -29,6 +29,7 @@ gem 'bcrypt', '~> 3.1', '>= 3.1.13'
 gem 'pry'
 
 gem 'state_of_the_nation'
+gem 'active_model_serializers', '~> 0.10.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

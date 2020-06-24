@@ -5,7 +5,7 @@ RSpec.describe Api::V1::PostsController, type: :controller do
   let(:user) { create(:user, email: "foo@foo.foo") }
   let(:valid_session) { { user_id: user.id } }
 
-  describe "GET #index" do
+  context "ensure authentication" do
     it "returns a not successful response when not logged in" do
       get :index, params: {}, session: invalid_session
       expect(response).to_not be_successful

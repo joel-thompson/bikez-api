@@ -50,6 +50,7 @@ class Api::V1::BikesController < AuthenticatedApplicationController
 
     if bike
       bike.destroy!
+      render json: { status: "deleted" }, status: 200
     else
       render json: { errors: ["bike not found"] }, status: 404
     end

@@ -47,6 +47,7 @@ class Api::V1::SuspensionPartsController < AuthenticatedApplicationController
 
     if part
       part.destroy!
+      render json: { status: "deleted" }, status: 200
     else
       render json: { errors: ["suspension part not found"] }, status: 404
     end

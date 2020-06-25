@@ -195,11 +195,13 @@ RSpec.describe Api::V1::SuspensionPartsController, type: :controller do
   end
 
   context "#destroy" do
-    it "deletes the bike" do
+    it "deletes the bike and returns the delete status" do
       part = create(:suspension_part, user: user, name: "delete me")
       expect {
         delete :destroy, params: { id: part.id }, session: valid_session
       }.to change{ SuspensionPart.count }.by(-1)
+      expect(response).to be_successful
+      expect(JSON.parse(response.body)).to eq({ "status" => 'deleted' })
     end
 
     it "returns 404 if the bike cant be found" do

@@ -152,6 +152,8 @@ RSpec.describe Api::V1::BikesController, type: :controller do
       expect {
         delete :destroy, params: { id: bike.id }, session: valid_session
       }.to change{ Bike.count }.by(-1)
+      expect(response).to be_successful
+      expect(JSON.parse(response.body)).to eq({ "status" => 'deleted' })
     end
 
     it "returns 404 if the bike cant be found" do
